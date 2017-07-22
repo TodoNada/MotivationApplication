@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLinearLayoutFragmentNotes">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutName">
+
+        <TextView
+            android:text="nameOfReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvNameReminder"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDescription">
+
+        <TextView
+            android:text="DetailsOfReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDetailsReminder"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutReminderType">
+
+        <TextView
+            android:text="Type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeReminder"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="TypeOfReminder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTypeValueReminder"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutSetDateTimeReminder">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutTargetDate">
+
+        <TextView
+            android:text="Target date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTargetDateReminder"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTargetDateValueReminder"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutImportancy">
+
+        <TextView
+            android:text="Vibration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvVibration"
+            android:layout_weight="1" />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchVibration"
+            android:layout_weight="1"
+            android:clickable="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutTaskPercentage">
+
+        <TextView
+            android:text="Sound"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvSound"
+            android:layout_weight="1" />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchSound"
+            android:layout_weight="1"
+            android:clickable="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutReminders">
+
+        <TextView
+            android:text="Light"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvLight"
+            android:layout_weight="1" />
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/switchLight"
+            android:layout_weight="1"
+            android:clickable="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Change this reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonUpdateReminder"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

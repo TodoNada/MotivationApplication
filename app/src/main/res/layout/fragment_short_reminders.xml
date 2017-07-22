@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLinearLayoutFragmentNotes">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutName">
+
+        <TextView
+            android:text="nameOfReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewNameShortReminder"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDescription">
+
+        <TextView
+            android:text="DetailsOfReminder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDetailsShortReminder"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutSetDateTimeReminder">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutTargetDate">
+
+        <TextView
+            android:text="Target date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTargetDateReminder"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="Date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/texViewTargetDateValueShortReminder"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutImages">
+
+        <ImageView
+            android:src="@android:drawable/btn_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewTypeReminder"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:src="@android:drawable/btn_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewReminderVibration"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:src="@android:drawable/btn_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewReminderSound"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:src="@android:drawable/btn_dialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewReminderLight"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
+
+</LinearLayout>

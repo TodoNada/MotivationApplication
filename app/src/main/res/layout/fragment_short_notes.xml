@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/mainLinearLayoutFragmentShortNotes"
+    android:layout_height="140dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutName">
+
+        <TextView
+            android:text="nameOfNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvShortName"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDescription">
+
+        <TextView
+            android:text="DescriptionOfNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvShortDescription"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDatePercents">
+
+        <TextView
+            android:text="Progress of Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPercentsDate"
+            android:layout_weight="1" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBarTimeProgressShort"
+            android:layout_weight="2"
+            android:max="100"
+            android:progress="40" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutTaskPercentage">
+
+        <TextView
+            android:text="Task progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTaskProgress"
+            android:layout_weight="1" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBarTaskPercentageShort"
+            android:layout_weight="2"
+            android:max="100"
+            android:progress="65" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="452dp"
+        android:id="@+id/LinearLayoutImages">
+
+        <ImageView
+            android:src="@android:drawable/btn_star_big_on"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewRemindersPresentShort"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:id="@+id/imageViewNoteImportancyShort" />
+    </LinearLayout>
+
+</LinearLayout>

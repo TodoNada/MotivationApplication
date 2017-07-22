@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- id for note item to be received by NotesAdapter.java -->
+    <item type="id" name="note_item_object" />
+    <item type="id" name="note_item_index" />
+    <item type="id" name="note_item_id" />
+
+	<!-- id for note item to be received by RemindersAdapter.java -->
+	<item type="id" name="reminder_item_object" />
+	<item type="id" name="reminder_item_index" />
+	<item type="id" name="reminder_item_id" />
+
+	<item type="id" name="note_view_edit" />
+	<item type="id" name="note_view_preview" />
+</resources>

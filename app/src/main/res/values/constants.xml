@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name = "INTENT_SHOW_NOTE_BY_ID">intent_show_note_by_id</string>
+</resources>

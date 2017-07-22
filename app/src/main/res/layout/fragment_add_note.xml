@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLinearLayoutFragmentNotes">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutNoteName">
+
+        <TextView
+            android:text="name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewNameAdd"
+            android:layout_weight="4" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="someName"
+            android:ems="1"
+            android:id="@+id/editTextNameNoteAdd"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDescription">
+
+        <TextView
+            android:text="Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewDescriptionAdd"
+            android:layout_weight="4" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="someDescription"
+            android:ems="10"
+            android:id="@+id/editTextDescriptionNoteAdd"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutBeginDate">
+
+        <TextView
+            android:text="Begin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBeginAdd"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="BeginDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewBeginDateAdd"
+            android:layout_weight="2" />
+
+        <Button
+            android:text="Set"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSetBeginTime"
+            android:layout_weight="1"
+            android:width="25dp"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutEndDate">
+
+        <TextView
+            android:text="End"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewEndAdd"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="EndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewEndDateAdd"
+            android:layout_weight="2" />
+
+        <Button
+            android:text="Set"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSetEndTime"
+            android:layout_weight="1"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutDatePercents">
+
+        <TextView
+            android:text="Progress of Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewProgressTimeAdd"
+            android:layout_weight="1" />
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBarTimeProgress"
+            android:layout_weight="2"
+            android:max="100"
+            android:progress="40" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutImportancy">
+
+        <TextView
+            android:text="Importancy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewImportancyAdd"
+            android:layout_weight="4" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerImportance"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutTaskPercentage">
+
+        <TextView
+            android:text="Task progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewTaskProgressAdd"
+            android:layout_weight="1" />
+
+        <SeekBar
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBarTaskProgressInitial"
+            android:layout_weight="4"
+            android:max="100"
+            android:progress="0" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayoutReminders">
+
+        <TextView
+            android:text="Reminders count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewRemindersAdd"
+            android:layout_weight="1" />
+
+        <TextView
+            android:text="0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewRemindersCountAdd"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <Button
+            android:text="Add Task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonAddTask"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>
