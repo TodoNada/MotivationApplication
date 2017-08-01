@@ -3,14 +3,16 @@ package com.golynskyy.ipm.motivationapp.models;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.golynskyy.ipm.motivationapp.basic.BasicNotes;
 import com.golynskyy.ipm.motivationapp.database.DatabaseSelectable;
+import com.golynskyy.ipm.motivationapp.basic.BasicNote;
+
+import java.util.ArrayList;
 
 /**
  * Created by Dep5 on 27.07.2017.
  */
 
-public class Notes extends BasicNotes implements DatabaseSelectable {
+public class Notes<T extends BasicNote>  extends ArrayList<T>  implements DatabaseSelectable {
 
     private SQLiteDatabase db;
 
@@ -33,6 +35,24 @@ public class Notes extends BasicNotes implements DatabaseSelectable {
     {
         this.db = db;
     }
+
+
+    public static Notes fromArrayList(ArrayList<Note> basicArrayList)
+    {
+        Notes list = new Notes();
+        for(int i=0; i<basicArrayList.size(); i++)
+        {
+            list.set(i, basicArrayList.get(i));
+        }
+        return list;
+    }
+
+    @Override
+    public T get(int i)
+    {
+        return super.get(i);
+    }
+
 
 
     @Override
@@ -71,7 +91,7 @@ public class Notes extends BasicNotes implements DatabaseSelectable {
                     note.setEndDate(loader.getLong(loader.getColumnIndex(DatabaseStructure.columns.note.endDate)));
                     note.setAlarmIndex(loader.getInt(loader.getColumnIndex(DatabaseStructure.columns.note.alarmIndex)));
 
-                    this.add(note);
+                    this.add((T)note);
 
                     loader.moveToNext();
                 }

@@ -15,7 +15,7 @@ import static com.golynskyy.ipm.motivationapp.models.DatabaseStructure.columns.n
 public class DBHelper extends SQLiteOpenHelper {
 
     static final int DB_VERSION = 42;
-    static final String DB_NAME = "motivation_app";
+    static final String DB_NAME = "motivation_app.db";
 
     public DBHelper(Context context)
     {
@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 DatabaseStructure.columns.reminders.details+" TEXT, " +
                 DatabaseStructure.columns.reminders.light+" INTEGER, " +
                 DatabaseStructure.columns.reminders.vibrate+" INTEGER, " +
-                DatabaseStructure.columns.reminders.sound+" INTEGER, " +
+                DatabaseStructure.columns.reminders.sound+" INTEGER" +
                 ")");
 
 

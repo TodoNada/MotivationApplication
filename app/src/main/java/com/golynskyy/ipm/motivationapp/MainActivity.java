@@ -10,20 +10,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
 import com.golynskyy.ipm.motivationapp.models.Note;
+import com.golynskyy.ipm.motivationapp.models.Notes;
 import com.golynskyy.ipm.motivationapp.adapters.NotesAdapter;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
-import static android.R.attr.data;
-import static android.R.attr.name;
-import static com.golynskyy.ipm.motivationapp.R.id.tvName;
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_ADD_NOTE_ACTIVITY;
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_NOTE_ACTIVITY;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_DELETE_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_NOTE;
-import static com.golynskyy.ipm.motivationapp.models.DatabaseStructure.columns.reminders.noteId;
+import android.database.sqlite.SQLiteDatabase;
 
 public class MainActivity extends Activity {
 
@@ -31,7 +30,47 @@ public class MainActivity extends Activity {
     private Button btnAddNewNote;
 
     private NotesAdapter notesAdapter;
+    private Notes notes = new Notes();
     private long noteLocalId = -1;
+    private LocalDbStorage localDbStorage;
+
+    // for testing delete later
+    private void testAddingToDb() {
+        localDbStorage.reopen();
+        SQLiteDatabase sqLiteDatabase = localDbStorage.getDb();
+        notes.setDb(sqLiteDatabase);
+        for (int i = 1; i < 9; i++ ) {
+            Note note = new Note(sqLiteDatabase);
+            note.setId(i);
+            note.setName(" Note "+i);
+            note.setDescription(" Description "+i);
+            note.setType(i % 3);
+            note.setStatus(i * 10);
+            note.setReminders(0);
+            note.setAlarmIndex((i % 3) + 1);
+            note.setTags("Tag "+ i);
+
+            Calendar calendar = Calendar.getInstance();
+            long nowTime = calendar.getTimeInMillis();
+            note.setDateCreated(nowTime);
+            note.setBeginDate(nowTime+i*100+i);
+            note.setEndDate(nowTime + i*1000000);
+            note.setLastModified(nowTime);
+            note.insert();
+            notes.add(note);
+            }
+
+        localDbStorage.close();
+    }
+
+    // for testing
+    private void testGetNotesFromDb() {
+        localDbStorage.reopen();
+        SQLiteDatabase sqLiteDatabase = localDbStorage.getDb();
+        notes.setDb(sqLiteDatabase);
+        notes.loadFromDb("",new String[] {},0);
+        localDbStorage.close();
+    }
 
     private void initViews() {
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
@@ -44,7 +83,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        lvNotes.setAdapter(notesAdapter);
+
 
         lvNotes.setOnItemClickListener(new OnItemClickListener()
         {
@@ -71,29 +110,16 @@ public class MainActivity extends Activity {
          Log.d("MAIN" , " STARTED");
 
 
-        Note note1 = new Note();
-        Note note2 = new Note();
-        note1.setId(120);
-        note2.setId(115);
-        note1.setName("name1");
-        note2.setName("name2");
-        note1.setDescription("descr1");
-        note2.setDescription("descr2");
-        note1.setStatus(80);
-        note2.setStatus(40);
-        note1.setBeginDate(100);
-        note2.setBeginDate(200);
-        note1.setLastModified(150);
-        note1.setEndDate(200);
-        note2.setLastModified(250);
-        note2.setEndDate(500);
+        localDbStorage = new LocalDbStorage(this);
 
-        ArrayList<Note> al = new ArrayList<Note>();
-        al.add(note1);
-        al.add(note2);
-        notesAdapter = new NotesAdapter(this,al);
+       // testAddingToDb();
+           testGetNotesFromDb();
+
+        notesAdapter = new NotesAdapter(this,notes);
 
          initViews();
+
+        lvNotes.setAdapter(notesAdapter);
 
     }
 
@@ -113,6 +139,7 @@ public class MainActivity extends Activity {
                     String stringId = data.getStringExtra("NOTE_ID");
                     noteLocalId = Long.parseLong(stringId);
                     //TODO: update adapter after deleted note
+                     notesAdapter.notifyDataSetChanged();
                     Log.d("MAIN", "Deleted NOTE_ID = "+noteLocalId);
                     return;
                 }

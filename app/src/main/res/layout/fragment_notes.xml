@@ -150,7 +150,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutReminders">
+        android:id="@+id/LinearLayoutRemindersNote">
 
         <TextView
             android:text="Reminders count"
@@ -168,25 +168,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/LinearLayoutRemindersNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutReminders">
+        android:orientation="horizontal">
 
         <Button
-            android:text="Show reminders"
+            android:id="@+id/buttonShowReminders"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonShowReminders"
             android:layout_weight="1"
+            android:text="Show reminders"
             android:textSize="14sp" />
 
         <Button
-            android:text="Add reminder"
+            android:id="@+id/buttonAddReminder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonAddReminder"
             android:layout_weight="1"
+            android:text="Add reminder"
             android:textSize="14sp" />
 
     </LinearLayout>

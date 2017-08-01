@@ -3,14 +3,16 @@ package com.golynskyy.ipm.motivationapp.models;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.golynskyy.ipm.motivationapp.basic.BasicReminders;
 import com.golynskyy.ipm.motivationapp.database.DatabaseSelectable;
+import com.golynskyy.ipm.motivationapp.basic.BasicReminder;
+
+import java.util.ArrayList;
 
 /**
  * Created by Dep5 on 27.07.2017.
  */
 
-public class Reminders extends BasicReminders implements DatabaseSelectable {
+public class Reminders<T extends BasicReminder> extends ArrayList<T> implements DatabaseSelectable {
 
     private SQLiteDatabase db;
 
@@ -30,6 +32,23 @@ public class Reminders extends BasicReminders implements DatabaseSelectable {
     public void setDb(SQLiteDatabase db)
     {
         this.db = db;
+    }
+
+
+    public static Reminders fromArrayList(ArrayList<BasicReminder> basicArrayList)
+    {
+        Reminders list = new Reminders();
+        for(int i=0; i<basicArrayList.size(); i++)
+        {
+            list.set(i, basicArrayList.get(i));
+        }
+        return list;
+    }
+
+    @Override
+    public T get(int i)
+    {
+        return super.get(i);
     }
 
     @Override
@@ -67,7 +86,7 @@ public class Reminders extends BasicReminders implements DatabaseSelectable {
                     reminder.setLight(loader.getInt(loader.getColumnIndex(DatabaseStructure.columns.reminders.light)));
 
 
-                    this.add(reminder);
+                    this.add((T)reminder);
 
                     loader.moveToNext();
                 }

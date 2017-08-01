@@ -10,24 +10,26 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.golynskyy.ipm.motivationapp.R;
-import com.golynskyy.ipm.motivationapp.models.*;
-
+import com.golynskyy.ipm.motivationapp.basic.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dep5 on 26.07.2017.
  */
 
-public class NotesAdapter extends ArrayAdapter<Note> {
-
-    ArrayList<Note> noteList;       // The list of notes that will be displayed
-    LayoutInflater inflater;
-    Context context;
+public class NotesAdapter <T extends BasicNote> extends ArrayAdapter<T> {
 
 
-    public NotesAdapter(Context context, ArrayList<Note> noteList) {
+    protected List noteList;       // The list of notes that will be displayed
+    protected LayoutInflater inflater;
+    protected Context context;
+
+
+
+    public NotesAdapter(Context context, List<T> noteList) {
         super(context, R.layout.fragment_short_notes, noteList);
 
         this.context = context;
@@ -60,10 +62,10 @@ public class NotesAdapter extends ArrayAdapter<Note> {
             final ViewHolder viewHolder = new ViewHolder();
 
                 viewHolder.innerLayout = (LinearLayout) view.findViewById(R.id.mainLinearLayoutFragmentShortNotes);
-                viewHolder.noteTitle = (TextView) view.findViewById(R.id.tvShortName);
-                viewHolder.noteDescription = (TextView) view.findViewById(R.id.tvShortDescription);
-                viewHolder.pbTimeProgress = (ProgressBar) view.findViewById(R.id.progressBarTimeProgressShort);
-                viewHolder.pbTaskProgress = (ProgressBar) view.findViewById(R.id.progressBarTaskPercentageShort);
+                viewHolder.noteTitle = (TextView) view.findViewById(R.id.textViewShortName);
+                viewHolder.noteDescription = (TextView) view.findViewById(R.id.textViewShortDescription);
+                viewHolder.pbTimeProgress = (ProgressBar) view.findViewById(R.id.progressBarShortTimeProgress);
+                viewHolder.pbTaskProgress = (ProgressBar) view.findViewById(R.id.progressBarShortTaskPercentage);
                 view.setTag(R.id.note_item_object,viewHolder);
         }
         else
@@ -73,7 +75,7 @@ public class NotesAdapter extends ArrayAdapter<Note> {
 
         final ViewHolder viewHolder = (ViewHolder) view.getTag(R.id.note_item_object);
 
-        Note noteItem = noteList.get(position);
+        BasicNote noteItem = (BasicNote) noteList.get(position);
 
         view.setTag(R.id.note_item_id, noteItem.getId());
         view.setTag(R.id.note_item_index, position);
@@ -88,7 +90,6 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         viewHolder.noteDescription.setText(noteItem.getDescription());
         viewHolder.pbTaskProgress.setProgress(noteItem.getStatus());
         viewHolder.pbTimeProgress.setProgress((int)(100*(noteItem.getLastModified()-noteItem.getBeginDate())/(noteItem.getEndDate()-noteItem.getBeginDate())));
-//        viewHolder.date.setText(noteItem.getLastModified());
 
         /*
         SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
@@ -119,7 +120,6 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         */
         return view;
     }
-
 
 
 }

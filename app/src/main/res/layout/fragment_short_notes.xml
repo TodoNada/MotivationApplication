@@ -15,7 +15,7 @@
             android:text="nameOfNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvShortName"
+            android:id="@+id/textViewShortName"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -29,7 +29,7 @@
             android:text="DescriptionOfNote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvShortDescription"
+            android:id="@+id/textViewShortDescription"
             android:layout_weight="1" />
     </LinearLayout>
 
@@ -44,14 +44,14 @@
             android:text="Progress of Time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvPercentsDate"
+            android:id="@+id/textViewShortPercentsDate"
             android:layout_weight="1" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBarTimeProgressShort"
+            android:id="@+id/progressBarShortTimeProgress"
             android:layout_weight="2"
             android:max="100"
             android:progress="40" />
@@ -68,14 +68,14 @@
             android:text="Task progress"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTaskProgress"
+            android:id="@+id/textViewShortTaskProgress"
             android:layout_weight="1" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBarTaskPercentageShort"
+            android:id="@+id/progressBarShortTaskPercentage"
             android:layout_weight="2"
             android:max="100"
             android:progress="65" />

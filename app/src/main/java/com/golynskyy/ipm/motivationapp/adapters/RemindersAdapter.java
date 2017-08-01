@@ -10,23 +10,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.golynskyy.ipm.motivationapp.R;
-import com.golynskyy.ipm.motivationapp.models.Reminder;
+import com.golynskyy.ipm.motivationapp.basic.*;
 
 import java.util.ArrayList;
+
 
 /**
  * Created by Dep5 on 26.07.2017.
  */
 
 
-public class RemindersAdapter extends ArrayAdapter<Reminder> {
+public class RemindersAdapter extends ArrayAdapter<BasicReminder> {
 
-    ArrayList<Reminder> reminderList;       // The list of reminders that will be displayed
+    ArrayList<BasicReminder> reminderList;       // The list of reminders that will be displayed
     LayoutInflater inflater;
     Context context;
 
 
-    public RemindersAdapter(Context context, ArrayList<Reminder> reminderList) {
+    public RemindersAdapter(Context context, ArrayList<BasicReminder> reminderList) {
         super(context, R.layout.fragment_short_reminders, reminderList);
 
         this.context = context;
@@ -72,7 +73,7 @@ public class RemindersAdapter extends ArrayAdapter<Reminder> {
 
         final ViewHolder viewHolder = (ViewHolder) view.getTag(R.id.reminder_item_object);
 
-        Reminder reminderItem = reminderList.get(position);
+        BasicReminder reminderItem = reminderList.get(position);
 
         view.setTag(R.id.reminder_item_id, reminderItem.getId());
         view.setTag(R.id.reminder_item_index, position);

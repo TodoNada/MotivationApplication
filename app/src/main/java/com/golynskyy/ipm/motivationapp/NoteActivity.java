@@ -6,8 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+
+import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
+import com.golynskyy.ipm.motivationapp.models.DatabaseStructure;
+import com.golynskyy.ipm.motivationapp.models.Note;
+import com.golynskyy.ipm.motivationapp.models.Notes;
+
+
+import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_ADD_REMINDER_ACTIVITY;
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_REMINDERS_LIST_ACTIVITY;
@@ -22,7 +31,10 @@ import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_NO
 
 public class NoteActivity extends Activity {
 
-    private long noteLocalId;
+    private static long noteLocalId = -1;
+    private Notes notes;
+    private Note currentNote;
+    private LocalDbStorage localDbStorageNote;
 
     TextView tvName;
     TextView tvDescription;
@@ -30,6 +42,9 @@ public class NoteActivity extends Activity {
     TextView tvEndDate;
     TextView tvRemindersCount;
     TextView tvImportancy;
+
+    ProgressBar pbTaskProgress;
+    ProgressBar pbTimeProgress;
 
 
     Button btnUpdateProgress;
@@ -39,20 +54,34 @@ public class NoteActivity extends Activity {
 
 
     private void initViews() {
+
         tvName = (TextView)findViewById(R.id.textViewName);
+            tvName.setText(currentNote.getName());
         tvDescription = (TextView)findViewById(R.id.textViewDescription);
+            tvDescription.setText(currentNote.getDescription());
         tvBeginDate = (TextView)findViewById(R.id.textViewBeginDate);
+            tvBeginDate.setText(""+currentNote.getBeginDate());
         tvEndDate = (TextView)findViewById(R.id.textViewEndDate);
+            tvEndDate.setText(""+currentNote.getEndDate());
         tvRemindersCount = (TextView)findViewById(R.id.textViewRemindersCount);
+            tvRemindersCount.setText(""+currentNote.getReminders());
         tvImportancy = (TextView)findViewById(R.id.textViewImportancyLevel);
+            tvImportancy.setText(""+currentNote.getType());
+        pbTaskProgress = (ProgressBar)findViewById(R.id.progressBarTaskPercentage);
+            pbTaskProgress.setProgress(currentNote.getStatus());
+        pbTimeProgress = (ProgressBar)findViewById(R.id.progressBarTimeProgress);
+            //TODO: realize checking if now time is not in range beginTime..endTime
+            Calendar calendar = Calendar.getInstance();
+            long nowTime = calendar.getTimeInMillis();
+            pbTimeProgress.setProgress((int) (100*(nowTime - currentNote.getBeginDate())/(currentNote.getEndDate() - currentNote.getBeginDate())));
 
         btnDeleteNote = (Button) findViewById(R.id.buttonDeleteNote);
         btnDeleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: realize deleting of current note
-                //TODO: realize adapter refreshing without deleted note
-                //TODO: realize deleting current note form DB and it's reminders
+                //TODO: deleting didn*t work properly
+                if (!deleteNoteFromDatabase()) Log.d("ACTIVITY NOTE", "note not deleted");
+                 //TODO: realize deleting current note reminders
                 Intent intent = new Intent();
                 intent.putExtra("NOTE_ID", "" + noteLocalId);
                 setResult(RESULT_CODE_DELETE_NOTE,intent);
@@ -87,18 +116,42 @@ public class NoteActivity extends Activity {
         });
     }
 
+    private boolean getNoteFromDatabase(long id) {
+        localDbStorageNote.reopen();
+        notes = new Notes(localDbStorageNote.getDb());
+        boolean notesSelected = notes.loadFromDb(DatabaseStructure.columns.note.id+" = ?",new String[] {""+id},0);
+        currentNote = (Note)notes.get(0);
+        localDbStorageNote.close();
+        return notesSelected;
+    }
+
+
+    private boolean deleteNoteFromDatabase() {
+        localDbStorageNote.reopen();
+        boolean noteDeleted = currentNote.remove();
+        localDbStorageNote.close();
+        return noteDeleted;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_notes);
-        initViews();
+
 
         Intent intent = getIntent();
         Log.d("NOTE ", "Intent IS HERE");
         noteLocalId = Long.parseLong(intent.getStringExtra("NOTE_ID"));
-        //TODO: realize getting Note by noteLocalId from DB
-        tvName.setText(""+noteLocalId);
+
+        //initialize db
+        localDbStorageNote = new LocalDbStorage(this);
+
+        // if note can not be loaded then no initialization
+        if (!getNoteFromDatabase(noteLocalId)) return;
+
+        initViews();
+
     }
 
 
