@@ -13,6 +13,7 @@ import com.golynskyy.ipm.motivationapp.R;
 import com.golynskyy.ipm.motivationapp.basic.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -20,14 +21,14 @@ import java.util.ArrayList;
  */
 
 
-public class RemindersAdapter extends ArrayAdapter<BasicReminder> {
+public class RemindersAdapter<T extends BasicReminder> extends ArrayAdapter<T> {
 
-    ArrayList<BasicReminder> reminderList;       // The list of reminders that will be displayed
-    LayoutInflater inflater;
-    Context context;
+    protected List reminderList;       // The list of reminders that will be displayed
+    protected LayoutInflater inflater;
+    protected Context context;
 
 
-    public RemindersAdapter(Context context, ArrayList<BasicReminder> reminderList) {
+    public RemindersAdapter(Context context, List<T> reminderList) {
         super(context, R.layout.fragment_short_reminders, reminderList);
 
         this.context = context;
@@ -73,7 +74,7 @@ public class RemindersAdapter extends ArrayAdapter<BasicReminder> {
 
         final ViewHolder viewHolder = (ViewHolder) view.getTag(R.id.reminder_item_object);
 
-        BasicReminder reminderItem = reminderList.get(position);
+        BasicReminder reminderItem = (BasicReminder)reminderList.get(position);
 
         view.setTag(R.id.reminder_item_id, reminderItem.getId());
         view.setTag(R.id.reminder_item_index, position);
