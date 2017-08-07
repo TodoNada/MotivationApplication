@@ -76,6 +76,7 @@ public class Reminders<T extends BasicReminder> extends ArrayList<T> implements 
 
                     Reminder reminder = new Reminder();
                     reminder.setId(loader.getLong(loader.getColumnIndex(DatabaseStructure.columns.reminders.id)));
+                    reminder.setType(loader.getInt(loader.getColumnIndex(DatabaseStructure.columns.reminders.type)));
                     reminder.setTargetDate(loader.getLong(loader.getColumnIndex(DatabaseStructure.columns.reminders.targetDate)));
                     reminder.setNoteId(loader.getLong(loader.getColumnIndex(DatabaseStructure.columns.reminders.noteId)));
                     reminder.setGap(loader.getLong(loader.getColumnIndex(DatabaseStructure.columns.reminders.gap)));

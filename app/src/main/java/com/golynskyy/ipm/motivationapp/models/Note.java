@@ -45,7 +45,6 @@ public class Note extends BasicNote implements DatabaseStorable{
         if(db != null) {
             try {
                 String insertSql = "INSERT INTO " + getTableNameInDb() + " (" +
-                        DatabaseStructure.columns.note.id + ", " +
                         DatabaseStructure.columns.note.noteName + ", " +
                         DatabaseStructure.columns.note.noteDesc + ", " +
                         DatabaseStructure.columns.note.status + ", " +
@@ -57,12 +56,11 @@ public class Note extends BasicNote implements DatabaseStorable{
                         DatabaseStructure.columns.note.beginDate + ", " +
                         DatabaseStructure.columns.note.endDate + ", " +
                         DatabaseStructure.columns.note.alarmIndex + " " +
-                        ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+                        ") VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 
                 int n = 1;
                 SQLiteStatement ss = db.compileStatement(insertSql);
-                ss.bindLong(n++, getId());
                 ss.bindString(n++,getName());
                 ss.bindString(n++,getDescription());
                 ss.bindLong(n++, getStatus());
@@ -77,7 +75,6 @@ public class Note extends BasicNote implements DatabaseStorable{
 
                 long localId = ss.executeInsert();
 
-                // TODO: watch have new Note new id
                 setId(localId);
 
                 ss.close();
@@ -113,7 +110,7 @@ public class Note extends BasicNote implements DatabaseStorable{
                         DatabaseStructure.columns.note.lastModified + " = ?, " +
                         DatabaseStructure.columns.note.beginDate + " = ?, " +
                         DatabaseStructure.columns.note.endDate + " = ?, " +
-                        DatabaseStructure.columns.note.alarmIndex + " = ?, " +
+                        DatabaseStructure.columns.note.alarmIndex + " = ?" +
                         " WHERE " + DatabaseStructure.columns.note.id + " = ?";
 
                 int n = 1;

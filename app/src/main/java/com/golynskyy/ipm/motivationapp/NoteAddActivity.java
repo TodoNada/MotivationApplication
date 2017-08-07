@@ -3,6 +3,7 @@ package com.golynskyy.ipm.motivationapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
+import com.golynskyy.ipm.motivationapp.models.Note;
+import com.golynskyy.ipm.motivationapp.models.Notes;
+
+import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_UPDATE_NOTE_ACTIVITY;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_NOTE;
@@ -20,53 +27,83 @@ import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_NOTE;
 
 public class NoteAddActivity extends Activity {
 
-    private Button btnAddNewTask;
-    private Button btnSetTaskBeginDate;
-    private Button btnSetTaskEndDate;
+    private long noteLocalIdAdd = -1;
+    private Note currentNoteAdd;
+    private LocalDbStorage localDbStorageNoteAdd;
 
-    private EditText etName;
-    private EditText etDetails;
-    private TextView tvTaskBeginDate;
-    private TextView tvTaskEndDate;
 
-    private Spinner spinnerImportancy;
-    private SeekBar seekBarTaskProgress;
+    private Button btnAddNewTaskAdd;
+    private Button btnSetTaskBeginDateAdd;
+    private Button btnSetTaskEndDateAdd;
+
+    private EditText etNameAdd;
+    private EditText etDetailsAdd;
+    private TextView tvTaskBeginDateAdd;
+    private TextView tvTaskEndDateAdd;
+
+    private Spinner spinnerImportancyAdd;
+    private SeekBar seekBarTaskProgressAdd;
+
+    private boolean putNoteIntoDatabase(long id) {
+        //TODO: realize checking Note info validity
+        localDbStorageNoteAdd.reopen();
+        currentNoteAdd = new Note(localDbStorageNoteAdd.getDb());
+        Calendar calendar = Calendar.getInstance();
+        long nowTime = calendar.getTimeInMillis();
+        currentNoteAdd.setDateCreated(nowTime);
+        currentNoteAdd.setBeginDate(nowTime);
+        currentNoteAdd.setEndDate(nowTime + 1000000000);
+        currentNoteAdd.setLastModified(nowTime);
+        currentNoteAdd.setName(etNameAdd. getText().toString());
+        currentNoteAdd.setDescription(etDetailsAdd.getText().toString());
+        currentNoteAdd.setStatus(seekBarTaskProgressAdd.getProgress());
+        currentNoteAdd.setReminders(0);
+        currentNoteAdd.setTags("tag");
+        currentNoteAdd.setAlarmIndex(0);
+        currentNoteAdd.setType(spinnerImportancyAdd.getSelectedItemPosition());
+        boolean noteAdded = currentNoteAdd.insert();
+        localDbStorageNoteAdd.close();
+            if (noteAdded) noteLocalIdAdd = currentNoteAdd.getId();
+        return noteAdded;
+    }
+
 
 
     private void initViews() {
 
-      tvTaskBeginDate = (TextView)findViewById(R.id.textViewBeginDateAdd);
-      tvTaskEndDate = (TextView)findViewById(R.id.textViewEndDateAdd);
-      etName = (EditText)findViewById(R.id.editTextNameNoteAdd);
-      etDetails = (EditText)findViewById(R.id.editTextDescriptionNoteAdd);
+      tvTaskBeginDateAdd = (TextView)findViewById(R.id.textViewBeginDateAdd);
+      tvTaskEndDateAdd = (TextView)findViewById(R.id.textViewEndDateAdd);
+      etNameAdd = (EditText)findViewById(R.id.editTextNameNoteAdd);
+      etDetailsAdd = (EditText)findViewById(R.id.editTextDescriptionNoteAdd);
 
-      spinnerImportancy  = (Spinner)findViewById(R.id.spinnerImportance);
-      //TODO: add data selector ot spinner
+      spinnerImportancyAdd  = (Spinner)findViewById(R.id.spinnerImportance);
 
-      seekBarTaskProgress = (SeekBar)findViewById(R.id.seekBarTaskProgressInitial);
+      seekBarTaskProgressAdd = (SeekBar)findViewById(R.id.seekBarTaskProgressInitialNoteAdd);
 
-      btnAddNewTask = (Button) findViewById(R.id.buttonAddNewNote);
-      btnAddNewTask.setOnClickListener(new View.OnClickListener() {
+      btnAddNewTaskAdd = (Button) findViewById(R.id.buttonNoteAddTask);
+      btnAddNewTaskAdd.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              //TODO: realize checking Note info validity
-              //TODO: realize inserting new note into DB
+              //put new note into DB
+              if (! putNoteIntoDatabase(0)) Log.d("NOTEADD ACTIVITY", "note was not added to DB");
               Intent intent = new Intent();
+              intent.putExtra("NOTE_ID",""+noteLocalIdAdd);
+              Log.d("NOTEADD ACTIVITY","note added id = "+noteLocalIdAdd);
               setResult(RESULT_CODE_NEW_NOTE, intent);
               finish();
           }
       });
 
-      btnSetTaskBeginDate = (Button)findViewById(R.id.buttonSetBeginTime);
-      btnSetTaskBeginDate.setOnClickListener(new View.OnClickListener() {
+      btnSetTaskBeginDateAdd = (Button)findViewById(R.id.buttonSetBeginTimeAdd);
+      btnSetTaskBeginDateAdd.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
               //TODO: realize DateTime Picker Dialog
           }
       });
 
-      btnSetTaskEndDate = (Button)findViewById(R.id.buttonSetEndTime);
-      btnSetTaskEndDate.setOnClickListener(new View.OnClickListener() {
+      btnSetTaskEndDateAdd = (Button)findViewById(R.id.buttonSetEndTimeAdd);
+      btnSetTaskEndDateAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: realize DateTime Picker Dialog
@@ -79,7 +116,16 @@ public class NoteAddActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_add_note);
+
         Intent intent = getIntent();
+        Log.d("NOTE ADD", "Intent IS HERE");
+
+        //initialize db
+        localDbStorageNoteAdd = new LocalDbStorage(this);
+
+        //initialize views
+        initViews();
+
     }
 
     @Override

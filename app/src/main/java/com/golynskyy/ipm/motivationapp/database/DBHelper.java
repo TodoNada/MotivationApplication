@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // create notes table
         db.execSQL("CREATE TABLE "+ DatabaseStructure.tables.notes+" (" +
-                DatabaseStructure.columns.note.id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                DatabaseStructure.columns.note.id+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseStructure.columns.note.noteName+" TEXT, " +
                 DatabaseStructure.columns.note.noteDesc+" TEXT, " +
                 DatabaseStructure.columns.note.status+" INTEGER, " +
@@ -42,7 +42,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // create reminders table
         db.execSQL("CREATE TABLE "+ DatabaseStructure.tables.reminders+" (" +
-                DatabaseStructure.columns.reminders.id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                DatabaseStructure.columns.reminders.id+" INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseStructure.columns.reminders.type+" INTEGER, "+
                 DatabaseStructure.columns.reminders.targetDate+" INTEGER, "+
                 DatabaseStructure.columns.reminders.noteId+" INTEGER, " +

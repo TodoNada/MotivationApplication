@@ -12,11 +12,11 @@
         android:id="@+id/LinearLayoutName">
 
         <TextView
-            android:text="nameOfReminder"
+            android:id="@+id/textViewNameReminderShow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvNameReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="nameOfReminder" />
     </LinearLayout>
 
     <LinearLayout
@@ -26,11 +26,11 @@
         android:id="@+id/LinearLayoutDescription">
 
         <TextView
-            android:text="DetailsOfReminder"
+            android:id="@+id/textViewDetailsReminderShow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvDetailsReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="DetailsOfReminder" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,18 +40,18 @@
         android:id="@+id/LinearLayoutReminderType">
 
         <TextView
-            android:text="Type"
+            android:id="@+id/textViewTypeReminderCaptionShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTypeReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Type" />
 
         <TextView
-            android:text="TypeOfReminder"
+            android:id="@+id/textViewTypeValueReminderShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTypeValueReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="TypeOfReminder" />
 
     </LinearLayout>
 
@@ -70,18 +70,18 @@
         android:id="@+id/LinearLayoutTargetDate">
 
         <TextView
-            android:text="Target date"
+            android:id="@+id/textViewTargetDateReminderCaptionShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTargetDateReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Target date" />
 
         <TextView
-            android:text="Date"
+            android:id="@+id/textViewTargetDateValueReminderShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvTargetDateValueReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Date" />
 
     </LinearLayout>
 
@@ -92,16 +92,16 @@
         android:id="@+id/LinearLayoutImportancy">
 
         <TextView
-            android:text="Vibration"
+            android:id="@+id/textViewVibrationCaptionShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvVibration"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Vibration" />
 
         <Switch
+            android:id="@+id/switchVibrationShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/switchVibration"
             android:layout_weight="1"
             android:clickable="false" />
 
@@ -114,16 +114,16 @@
         android:id="@+id/LinearLayoutTaskPercentage">
 
         <TextView
-            android:text="Sound"
+            android:id="@+id/textViewSoundCaptionShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvSound"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Sound" />
 
         <Switch
+            android:id="@+id/switchSoundShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/switchSound"
             android:layout_weight="1"
             android:clickable="false" />
 
@@ -136,32 +136,48 @@
         android:id="@+id/LinearLayoutReminders">
 
         <TextView
-            android:text="Light"
+            android:id="@+id/textViewLightCaptionShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tvLight"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Light" />
 
         <Switch
+            android:id="@+id/switchLightShow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/switchLight"
             android:layout_weight="1"
             android:clickable="false" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/LinearLayoutChangeReminder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
-            android:text="Change this reminder"
+            android:id="@+id/buttonChangeReminderShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonUpdateReminder"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Change this reminder" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutDeleteReminder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonRemoveReminderShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Remove this reminder" />
+    </LinearLayout>
+
 
 </LinearLayout>

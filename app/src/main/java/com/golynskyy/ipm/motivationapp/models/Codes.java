@@ -21,6 +21,9 @@ public class Codes {
     public static final int RESULT_CODE_DELETE_NOTE = 508;
     public static final int RESULT_CODE_NEW_REMINDER = 600;
     public static final int RESULT_CODE_UPDATE_REMINDER = 700;
+    public static final int RESULT_CODE_NOT_UPDATED_REMINDER = 701;
+    public static final int RESULT_CODE_REMOVE_REMINDER = 708;
+
 
 
 

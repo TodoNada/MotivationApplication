@@ -45,7 +45,6 @@ public class Reminder extends BasicReminder implements DatabaseStorable {
         {
             try {
                 String insertSql = "INSERT INTO " + getTableNameInDb() + " (" +
-                        DatabaseStructure.columns.reminders.id + ", " +
                         DatabaseStructure.columns.reminders.type + ", " +
                         DatabaseStructure.columns.reminders.targetDate + ", " +
                         DatabaseStructure.columns.reminders.noteId + ", " +
@@ -55,11 +54,10 @@ public class Reminder extends BasicReminder implements DatabaseStorable {
                         DatabaseStructure.columns.reminders.vibrate + ", " +
                         DatabaseStructure.columns.reminders.sound + ", " +
                         DatabaseStructure.columns.reminders.light + " " +
-                        ") VALUES (?,?,?,?,?,?,?,?,?,?)";
+                        ") VALUES (?,?,?,?,?,?,?,?,?)";
 
                 int n = 1;
                 SQLiteStatement ss = db.compileStatement(insertSql);
-                ss.bindLong(n++, getId());
                 ss.bindLong(n++, getType());
                 ss.bindLong(n++, getTargetDate());
                 ss.bindLong(n++, getNoteId());
@@ -103,7 +101,7 @@ public class Reminder extends BasicReminder implements DatabaseStorable {
                         DatabaseStructure.columns.reminders.details + " = ?, " +
                         DatabaseStructure.columns.reminders.vibrate + " = ?, " +
                         DatabaseStructure.columns.reminders.sound + " = ?, " +
-                        DatabaseStructure.columns.reminders.light + " = ?, " +
+                        DatabaseStructure.columns.reminders.light + " = ?" +
                         " WHERE " + DatabaseStructure.columns.reminders.id + " = ?";
 
                 int n = 1;

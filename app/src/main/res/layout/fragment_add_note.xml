@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutNoteName">
+        android:id="@+id/LinearLayoutNoteNameAdd">
 
         <TextView
             android:text="name"
@@ -33,7 +33,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutDescription">
+        android:id="@+id/LinearLayoutDescriptionAdd">
 
         <TextView
             android:text="Description"
@@ -56,7 +56,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutBeginDate">
+        android:id="@+id/LinearLayoutBeginDateAdd">
 
         <TextView
             android:text="Begin"
@@ -76,7 +76,7 @@
             android:text="Set"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSetBeginTime"
+            android:id="@+id/buttonSetBeginTimeAdd"
             android:layout_weight="1"
             android:width="25dp"
             android:textSize="12sp" />
@@ -87,7 +87,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutEndDate">
+        android:id="@+id/LinearLayoutEndDateAdd">
 
         <TextView
             android:text="End"
@@ -107,7 +107,7 @@
             android:text="Set"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonSetEndTime"
+            android:id="@+id/buttonSetEndTimeAdd"
             android:layout_weight="1"
             android:textSize="12sp" />
 
@@ -118,7 +118,7 @@
         android:layout_gravity="top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutDatePercents">
+        android:id="@+id/LinearLayoutDatePercentsAdd">
 
         <TextView
             android:text="Progress of Time"
@@ -131,7 +131,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/progressBarTimeProgress"
+            android:id="@+id/progressBarTimeProgressAdd"
             android:layout_weight="2"
             android:max="100"
             android:progress="40" />
@@ -142,7 +142,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutImportancy">
+        android:id="@+id/LinearLayoutImportancyAdd">
 
         <TextView
             android:text="Importancy"
@@ -155,6 +155,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerImportance"
+            android:entries="@array/spinnerImportancyItems"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -163,7 +164,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutTaskPercentage">
+        android:id="@+id/LinearLayoutTaskPercentageAdd">
 
         <TextView
             android:text="Task progress"
@@ -175,7 +176,7 @@
         <SeekBar
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBarTaskProgressInitial"
+            android:id="@+id/seekBarTaskProgressInitialNoteAdd"
             android:layout_weight="4"
             android:max="100"
             android:progress="0" />
@@ -186,20 +187,20 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/LinearLayoutReminders">
+        android:id="@+id/LinearLayoutRemindersNoteAdd">
 
         <TextView
             android:text="Reminders count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewRemindersAdd"
+            android:id="@+id/textViewRemindersNoteAdd"
             android:layout_weight="1" />
 
         <TextView
             android:text="0"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewRemindersCountAdd"
+            android:id="@+id/textViewRemindersCountNoteAdd"
             android:layout_weight="1" />
 
     </LinearLayout>
@@ -214,7 +215,7 @@
             android:text="Add Task"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonAddTask"
+            android:id="@+id/buttonNoteAddTask"
             android:layout_weight="1" />
     </LinearLayout>
 
