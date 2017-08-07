@@ -82,7 +82,6 @@ public class NotesAdapter <T extends BasicNote> extends ArrayAdapter<T> {
 
         if(viewHolder.innerLayout != null)
         {
-           // viewHolder.innerLayout.setOnClickListener(this);
             viewHolder.innerLayout.setTag(R.id.note_item_index, position);
         }
 
@@ -91,33 +90,6 @@ public class NotesAdapter <T extends BasicNote> extends ArrayAdapter<T> {
         viewHolder.pbTaskProgress.setProgress(noteItem.getStatus());
         viewHolder.pbTimeProgress.setProgress((int)(100*(noteItem.getLastModified()-noteItem.getBeginDate())/(noteItem.getEndDate()-noteItem.getBeginDate())));
 
-        /*
-        SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
-        Date lastModifiedDate = new Date((long)noteItem.getLastModified()*1000);
-
-        // Displays the last modified date of the note
-        if(Utils.isDateToday(noteItem.getLastModified()))
-        {
-            viewHolder.date.setText(getContext().
-                    getString(R.string.today_capital) + "\n" + hourFormat.format(lastModifiedDate)
-            );
-        }
-        else if(Utils.isDateToday(noteItem.getLastModified()))
-        {
-            viewHolder.date.setText(getContext().
-                    getString(R.string.yesterday_capital) +"\n"+hourFormat.format(lastModifiedDate)
-            );
-        }
-        else
-        {
-            Calendar lastModifiedCalendar = Calendar.getInstance();
-            lastModifiedCalendar.setTime(lastModifiedDate);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy HH:mm");
-            viewHolder.date.setText(
-                    dateFormat.format(new Date(((long)noteItem.getLastModified()*1000))));
-        }
-        */
         return view;
     }
 

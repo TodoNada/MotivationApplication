@@ -1,6 +1,7 @@
 package com.golynskyy.ipm.motivationapp;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
+import com.golynskyy.ipm.motivationapp.dialogs.DialogDateAndTime;
 import com.golynskyy.ipm.motivationapp.models.Note;
 import com.golynskyy.ipm.motivationapp.models.Notes;
 
@@ -20,16 +22,21 @@ import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.REQUEST_CODE_FROM_UPDATE_NOTE_ACTIVITY;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_NOTE;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatNowDateTimeToString;
 
 /**
  * Created by Dep5 on 28.07.2017.
  */
 
-public class NoteAddActivity extends Activity {
+public class NoteAddActivity extends Activity implements DialogDateAndTime.DateTimeSettedDialogListener {
 
     private long noteLocalIdAdd = -1;
     private Note currentNoteAdd;
     private LocalDbStorage localDbStorageNoteAdd;
+    private long timeStampBeginDate;
+    private long timeStampEndDate;
+
 
 
     private Button btnAddNewTaskAdd;
@@ -44,6 +51,11 @@ public class NoteAddActivity extends Activity {
     private Spinner spinnerImportancyAdd;
     private SeekBar seekBarTaskProgressAdd;
 
+
+    protected DialogFragment dialogFragmentSetStartDate;
+    protected DialogFragment dialogFragmentSetEndDate;
+
+
     private boolean putNoteIntoDatabase(long id) {
         //TODO: realize checking Note info validity
         localDbStorageNoteAdd.reopen();
@@ -51,10 +63,11 @@ public class NoteAddActivity extends Activity {
         Calendar calendar = Calendar.getInstance();
         long nowTime = calendar.getTimeInMillis();
         currentNoteAdd.setDateCreated(nowTime);
-        currentNoteAdd.setBeginDate(nowTime);
-        currentNoteAdd.setEndDate(nowTime + 1000000000);
         currentNoteAdd.setLastModified(nowTime);
-        currentNoteAdd.setName(etNameAdd. getText().toString());
+        currentNoteAdd.setBeginDate(timeStampBeginDate);
+        currentNoteAdd.setEndDate(timeStampEndDate);
+        //other note fields
+        currentNoteAdd.setName(etNameAdd.getText().toString());
         currentNoteAdd.setDescription(etDetailsAdd.getText().toString());
         currentNoteAdd.setStatus(seekBarTaskProgressAdd.getProgress());
         currentNoteAdd.setReminders(0);
@@ -72,7 +85,9 @@ public class NoteAddActivity extends Activity {
     private void initViews() {
 
       tvTaskBeginDateAdd = (TextView)findViewById(R.id.textViewBeginDateAdd);
+        tvTaskBeginDateAdd.setText(formatNowDateTimeToString());
       tvTaskEndDateAdd = (TextView)findViewById(R.id.textViewEndDateAdd);
+        tvTaskEndDateAdd.setText(formatNowDateTimeToString());
       etNameAdd = (EditText)findViewById(R.id.editTextNameNoteAdd);
       etDetailsAdd = (EditText)findViewById(R.id.editTextDescriptionNoteAdd);
 
@@ -98,7 +113,7 @@ public class NoteAddActivity extends Activity {
       btnSetTaskBeginDateAdd.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              //TODO: realize DateTime Picker Dialog
+            dialogFragmentSetStartDate.show(getFragmentManager(),"dialogFragmentSetStartDate");
           }
       });
 
@@ -106,7 +121,7 @@ public class NoteAddActivity extends Activity {
       btnSetTaskEndDateAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: realize DateTime Picker Dialog
+            dialogFragmentSetEndDate.show(getFragmentManager(),"dialogFragmentSetEndDate");
             }
         });
 
@@ -125,6 +140,10 @@ public class NoteAddActivity extends Activity {
 
         //initialize views
         initViews();
+
+        //create dialogs
+        dialogFragmentSetStartDate = new DialogDateAndTime();
+        dialogFragmentSetEndDate = new DialogDateAndTime();
 
     }
 
@@ -162,5 +181,19 @@ public class NoteAddActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onFinishDateTimeDialogDialog(long timeStamp, String tag) {
+        if (tag.equalsIgnoreCase("dialogFragmentSetStartDate")) {
+           timeStampBeginDate = timeStamp;
+            tvTaskBeginDateAdd.setText(formatDateTimeToString(timeStamp));
+            return;
+        }
+        if (tag.equalsIgnoreCase("dialogFragmentSetEndDate")) {
+            timeStampBeginDate = timeStamp;
+            tvTaskEndDateAdd.setText(formatDateTimeToString(timeStamp));
+            return;
+        }
     }
 }

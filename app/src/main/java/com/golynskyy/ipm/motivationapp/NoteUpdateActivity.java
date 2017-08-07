@@ -19,6 +19,7 @@ import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_DELETE_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_NOTE;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
 
 /**
  * Created by Dep5 on 28.07.2017.
@@ -89,9 +90,9 @@ public class NoteUpdateActivity extends Activity {
         tvDescriptionUpdate = (TextView)findViewById(R.id.textViewDescriptionUpdate);
             tvDescriptionUpdate.setText(currentNoteUpdate.getDescription());
         tvBeginDateUpdate = (TextView)findViewById(R.id.textViewBeginDateUpdate);
-            tvBeginDateUpdate.setText(""+currentNoteUpdate.getBeginDate());
+            tvBeginDateUpdate.setText(formatDateTimeToString(currentNoteUpdate.getBeginDate()));
         tvEndDateUpdate = (TextView)findViewById(R.id.textViewEndDateUpdate);
-            tvEndDateUpdate.setText(""+currentNoteUpdate.getEndDate());
+            tvEndDateUpdate.setText(formatDateTimeToString(currentNoteUpdate.getEndDate()));
         tvRemindersCountUpdate = (TextView)findViewById(R.id.textViewRemindersCountUpdate);
             tvRemindersCountUpdate.setText(""+currentNoteUpdate.getReminders());
         tvImportancyUpdate = (TextView)findViewById(R.id.textViewImportancyLevelUpdate);

@@ -22,6 +22,7 @@ import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_REMINDER;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_REMINDER;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
 
 /**
  * Created by Dep5 on 29.07.2017.
@@ -55,7 +56,7 @@ public class ReminderUpdateActivity extends Activity {
     private void initViews() {
 
         tvReminderTargetDateUpdate = (TextView)findViewById(R.id.textViewTargetDateValueReminderUpdate);
-        tvReminderTargetDateUpdate.setText("" + currentReminderUpdate.getTargetDate());
+        tvReminderTargetDateUpdate.setText(formatDateTimeToString(currentReminderUpdate.getTargetDate()));
         etNameReminderUpdate = (EditText)findViewById(R.id.editTextNameReminderUpdate);
         etNameReminderUpdate.setText(currentReminderUpdate.getTitle());
         etDetailsReminderUpdate = (EditText)findViewById(R.id.editTextDetailsReminderUpdate);

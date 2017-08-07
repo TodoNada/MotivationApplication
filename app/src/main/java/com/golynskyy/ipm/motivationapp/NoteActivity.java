@@ -1,6 +1,7 @@
 package com.golynskyy.ipm.motivationapp;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
+import com.golynskyy.ipm.motivationapp.dialogs.DialogDateAndTime;
 import com.golynskyy.ipm.motivationapp.models.DatabaseStructure;
 import com.golynskyy.ipm.motivationapp.models.Note;
 import com.golynskyy.ipm.motivationapp.models.Notes;
@@ -28,6 +30,7 @@ import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_DELETE_NO
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_REMINDER;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_REMINDER;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
 
 /**
  * Created by Dep5 on 28.07.2017.
@@ -49,7 +52,6 @@ public class NoteActivity extends Activity {
     private ProgressBar pbTaskProgress;
     private ProgressBar pbTimeProgress;
 
-
     private Button btnUpdateProgress;
     private Button btnDeleteNote;
     private Button btnAddReminder;
@@ -63,9 +65,9 @@ public class NoteActivity extends Activity {
         tvDescription = (TextView)findViewById(R.id.textViewDescription);
             tvDescription.setText(currentNote.getDescription());
         tvBeginDate = (TextView)findViewById(R.id.textViewBeginDate);
-            tvBeginDate.setText(""+currentNote.getBeginDate());
+            tvBeginDate.setText(formatDateTimeToString(currentNote.getBeginDate()));
         tvEndDate = (TextView)findViewById(R.id.textViewEndDate);
-            tvEndDate.setText(""+currentNote.getEndDate());
+            tvEndDate.setText(formatDateTimeToString(currentNote.getEndDate()));
         tvRemindersCount = (TextView)findViewById(R.id.textViewRemindersCount);
             tvRemindersCount.setText(""+currentNote.getReminders());
         tvImportancy = (TextView)findViewById(R.id.textViewImportancyLevel);

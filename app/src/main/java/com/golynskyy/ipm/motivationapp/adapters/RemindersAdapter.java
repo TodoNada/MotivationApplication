@@ -15,6 +15,8 @@ import com.golynskyy.ipm.motivationapp.basic.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
+
 
 /**
  * Created by Dep5 on 26.07.2017.
@@ -87,36 +89,7 @@ public class RemindersAdapter<T extends BasicReminder> extends ArrayAdapter<T> {
 
         viewHolder.tvReminderTitle.setText(reminderItem.getTitle());
         viewHolder.tvReminderDescription.setText(reminderItem.getDetails());
-        viewHolder.tvReminderTargetDate.setText(""+reminderItem.getTargetDate());
-        //TODO: convert TargetDate into DateTime view
-
-        /*
-        SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm");
-        Date lastModifiedDate = new Date((long)noteItem.getLastModified()*1000);
-
-        // Displays the last modified date of the note
-        if(Utils.isDateToday(noteItem.getLastModified()))
-        {
-            viewHolder.date.setText(getContext().
-                    getString(R.string.today_capital) + "\n" + hourFormat.format(lastModifiedDate)
-            );
-        }
-        else if(Utils.isDateToday(noteItem.getLastModified()))
-        {
-            viewHolder.date.setText(getContext().
-                    getString(R.string.yesterday_capital) +"\n"+hourFormat.format(lastModifiedDate)
-            );
-        }
-        else
-        {
-            Calendar lastModifiedCalendar = Calendar.getInstance();
-            lastModifiedCalendar.setTime(lastModifiedDate);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy HH:mm");
-            viewHolder.date.setText(
-                    dateFormat.format(new Date(((long)noteItem.getLastModified()*1000))));
-        }
-        */
+        viewHolder.tvReminderTargetDate.setText(formatDateTimeToString(reminderItem.getTargetDate()));
         return view;
     }
 

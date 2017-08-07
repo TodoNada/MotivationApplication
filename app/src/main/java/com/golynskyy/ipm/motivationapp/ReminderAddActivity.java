@@ -1,6 +1,7 @@
 package com.golynskyy.ipm.motivationapp;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.golynskyy.ipm.motivationapp.database.LocalDbStorage;
+import com.golynskyy.ipm.motivationapp.dialogs.DialogDateAndTime;
 import com.golynskyy.ipm.motivationapp.models.DatabaseStructure;
 import com.golynskyy.ipm.motivationapp.models.Note;
 import com.golynskyy.ipm.motivationapp.models.Notes;
@@ -22,22 +24,23 @@ import java.util.Calendar;
 
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NEW_REMINDER;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
 
 /**
  * Created by Dep5 on 29.07.2017.
  */
 
-public class ReminderAddActivity extends Activity {
+public class ReminderAddActivity extends Activity implements DialogDateAndTime.DateTimeSettedDialogListener{
 
     private long noteLocalIdAddReminder = -1;
     private Reminder currentReminderAdd;
     private Note currentNoteAddReminder;
     private LocalDbStorage localDbStorageReminderAdd;
 
+    private long timeStampTargetDateTime;
 
     private Button btnAddNewReminderAdd;
-    private Button btnSetReminderDateAdd;
-    private Button btnSetReminderTimeAdd;
+    private Button btnSetReminderTargetDateTimeAdd;
 
     private EditText etNameReminderAdd;
     private EditText etDetailsReminderAdd;
@@ -49,7 +52,7 @@ public class ReminderAddActivity extends Activity {
     private Switch swLigthReminderAdd;
     private Switch swVibrationReminderAdd;
 
-
+    protected DialogFragment dialogFragmentSetTargetDateTime;
 
     private boolean getNoteFromDatabase(long id) {
         localDbStorageReminderAdd.reopen();
@@ -86,7 +89,7 @@ public class ReminderAddActivity extends Activity {
         currentReminderAdd.setDetails(etDetailsReminderAdd.getText().toString());
         //gap will be used later, I know It :)
         currentReminderAdd.setGap(100);
-        currentReminderAdd.setTargetDate(nowTime+100000000);
+        currentReminderAdd.setTargetDate(timeStampTargetDateTime);
         currentReminderAdd.setSound((swSoundReminderAdd.isChecked() == false)? -1 : 0);
         currentReminderAdd.setLight((swLigthReminderAdd.isChecked() == false)? -1 : 0);
         currentReminderAdd.setVibrate((swVibrationReminderAdd.isChecked() == false)? -1 : 0);
@@ -104,6 +107,8 @@ public class ReminderAddActivity extends Activity {
     private void initViews() {
 
         tvReminderDateAdd = (TextView)findViewById(R.id.textViewTargetDateValueReminderAdd);
+        Calendar calendar = Calendar.getInstance();
+        tvReminderDateAdd.setText(formatDateTimeToString(calendar.getTimeInMillis()));
         etNameReminderAdd = (EditText)findViewById(R.id.editTextNameReminderAdd);
         etDetailsReminderAdd = (EditText)findViewById(R.id.editTextDetailsReminderAdd);
 
@@ -131,19 +136,11 @@ public class ReminderAddActivity extends Activity {
             }
         });
 
-        btnSetReminderDateAdd = (Button)findViewById(R.id.buttonSetDateReminderAdd);
-        btnSetReminderDateAdd.setOnClickListener(new View.OnClickListener() {
+        btnSetReminderTargetDateTimeAdd = (Button)findViewById(R.id.buttonSetDateTimeTargetReminderAdd);
+        btnSetReminderTargetDateTimeAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: realize Date Picker Dialog
-            }
-        });
-
-        btnSetReminderTimeAdd = (Button)findViewById(R.id.buttonSetTimeReminderAdd);
-        btnSetReminderTimeAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO: realize Time Picker Dialog
+                dialogFragmentSetTargetDateTime.show(getFragmentManager(),"dialogFragmentSetTargetDateTime");
             }
         });
 
@@ -165,6 +162,9 @@ public class ReminderAddActivity extends Activity {
         localDbStorageReminderAdd = new LocalDbStorage(this);
 
         initViews();
+
+        //create dialog
+        dialogFragmentSetTargetDateTime = new DialogDateAndTime();
 
     }
 
@@ -196,5 +196,14 @@ public class ReminderAddActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onFinishDateTimeDialogDialog(long timeStamp, String tag) {
+        if (tag.equalsIgnoreCase("dialogFragmentSetTargetDateTime")) {
+            timeStampTargetDateTime = timeStamp;
+            tvReminderDateAdd.setText(formatDateTimeToString(timeStamp));
+            return;
+        }
     }
 }

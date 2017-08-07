@@ -30,6 +30,7 @@ import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_NOT_UPDAT
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_REMOVE_REMINDER;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_NOTE;
 import static com.golynskyy.ipm.motivationapp.models.Codes.RESULT_CODE_UPDATE_REMINDER;
+import static com.golynskyy.ipm.motivationapp.util.Utils.formatDateTimeToString;
 
 /**
  * Created by Dep5 on 28.07.2017.
@@ -130,7 +131,7 @@ public class ReminderActivity extends Activity {
     private void initViews() {
 
         tvReminderTargetDate = (TextView) findViewById(R.id.textViewTargetDateValueReminderShow);
-        tvReminderTargetDate.setText("" + currentReminder.getTargetDate());
+        tvReminderTargetDate.setText(formatDateTimeToString(currentReminder.getTargetDate()));
         tvNameReminder = (TextView) findViewById(R.id.textViewNameReminderShow);
         tvNameReminder.setText(currentReminder.getTitle());
         tvDetailsReminder = (TextView) findViewById(R.id.textViewDetailsReminderShow);
